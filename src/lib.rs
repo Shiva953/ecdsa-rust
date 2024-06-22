@@ -40,6 +40,7 @@ use zkp_elliptic_curve::{window_table_affine, Affine, GENERATOR};
 #[cfg(not(feature = "std"))]
 extern crate no_std_compat as std;
 use lazy_static::lazy_static;
+use sign::sign;
 
 lazy_static! {
     static ref GENERATOR_TABLE: [Affine; 32] = {
@@ -59,7 +60,7 @@ mod tests {
         #[test]
         fn test_ecdsa(digest: ScalarFieldElement, private_key: PrivateKey) {
             let public_key = PublicKey::from(&private_key);
-            let signature = private_key.sign(&digest);
+            let signature = sign(&private_key, &digest);
             prop_assert!(verify(&signature, &public_key, &digest));
         }
     );
