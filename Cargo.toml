@@ -1,0 +1,25 @@
+[package]
+name = "ECC-impl-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+itertools = { version = "0.9.0", default_features = false }
+lazy_static = { version = "1.3.0", features = [ "spin_no_std" ] } # TODO: When `std` is set we want this feature off!
+parity-scale-codec = { version = "1.3.0", default-features = false, optional = true }
+no-std-compat = { version = "0.4.0", features = [ "alloc" ] }
+tiny-keccak = { version = "2.0.1", features = ["sha3"] }
+serde = { version = "1.0", features = ["derive"], default-features = false, optional = true }
+zkp-elliptic-curve = { version = "0.2.0", default-features = false }
+zkp-macros-decl = { version = "0.2.0", default-features = false }
+zkp-primefield = { version = "0.2.0", default-features = false }
+zkp-u256 = { version = "0.2.0", default-features = false }
+zkp-macros-lib = { version = "0.2.0" }
+hex = { version = "0.4.3", features = ["alloc"] }
+
+[dev-dependencies]
+criterion = "0.3.0"
+proptest = "0.9.4"
+proptest-derive = "0.1.2"
+zkp-primefield = { version = "0.2.0", features = ["proptest"] }
+zkp-u256 = { version = "0.2.0", features = ["proptest", "proptest-derive"] }
